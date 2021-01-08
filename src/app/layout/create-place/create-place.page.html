@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create Place</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form (submit)="createPlace()">
+    <ion-item>
+      <ion-label position="stacked">Voyage</ion-label>
+      <!-- TODO VOYAGE -->
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="text" placeholder="Titre de l'étape" name="title" maxlength="64" required></ion-input>
+    </ion-item>
+
+    
+    <ion-item>
+      <ion-label position="stacked">Photos</ion-label>
+    </ion-item>
+      <!-- TODO PICS -->
+      <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
+        <ion-slide *ngFor="let photo of photoService.photos; index as position">
+            <ion-thumbnail>
+              <ion-img [src]="photo.webviewPath"></ion-img>
+            </ion-thumbnail>
+        </ion-slide>
+      </ion-slides>
+  
+
+      
+
+    <ion-item>
+      <ion-label position="stacked">Localisation</ion-label>
+      <!-- TODO MAP -->
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Description</ion-label>
+      <ion-input type="text" name="description"></ion-input>
+    </ion-item>
+
+    <ion-button type="submit">Ajouter</ion-button>
+  </form>
+
+</ion-content>
