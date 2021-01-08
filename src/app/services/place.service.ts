@@ -16,13 +16,13 @@ export class PlaceService {
 
   }
 
-  createPlace(token: string, body: Place): Observable<Place> {
+  createPlace(/* token: string,  */body: Place): Observable<Place> {
     const url = `${environment.apiUrl}/places`;
-    const httpOptions = {
+    /* const httpOptions = {
       headers: new HttpHeaders({
         Authorization: token
       })
-    }
-    return this.http.post<PlaceResponse>(url, body, httpOptions);
+    } */
+    return this.http.post<PlaceResponse>(url, body/* , httpOptions */);
   }
 }
