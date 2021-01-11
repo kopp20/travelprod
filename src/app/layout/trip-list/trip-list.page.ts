@@ -18,7 +18,7 @@ export class TripListPage implements ViewDidEnter {
 
   ionViewDidEnter(): void {
     // Make an HTTP request to retrieve the trips.
-    const url = `${environment.apiUrl}/trip`;
+    const url = `${environment.apiUrl}/trips`;
     this.http.get(url).subscribe((trips) => {
       console.log(`Trips loaded`, trips);
     });
