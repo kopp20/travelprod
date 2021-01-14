@@ -63,7 +63,7 @@ export class CreatePlacePage implements OnInit {
       },//this.location, // Todo
       tripHref: this.trips[this.trip].href,
       tripId: this.trips[this.trip].id,
-      //pictureUrl: `https://api.imgur.com/3/album/${newImgurAlbum.id}`
+      pictureUrl: `https://api.imgur.com/3/album/${newImgurAlbum.id}`
     }
 
     this.placeService.createPlace(newPlace).subscribe((place) => {
