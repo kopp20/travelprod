@@ -3,6 +3,8 @@ import { HttpClient } from "@angular/common/http";
 import { ViewDidEnter } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
 import { environment } from "src/environments/environment";
+import { Router } from "@angular/router";
+
 
 @Component({
   selector: 'app-trip-list',
@@ -13,7 +15,9 @@ export class TripListPage implements ViewDidEnter {
   constructor(
     private auth: AuthService,
     // TODO: inject the HTTP client.
-    public http: HttpClient
+    public http: HttpClient,
+        // Inject the router
+    private router: Router
   ) {}
 
   ionViewDidEnter(): void {
@@ -26,5 +30,9 @@ export class TripListPage implements ViewDidEnter {
 
   ngOnInit() {
   }
-
+  logOut() {
+    console.log("logging out...");
+    this.auth.logOut();
+    this.router.navigateByUrl("/login");
+  }
 }
