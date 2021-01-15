@@ -6,6 +6,7 @@ import { map } from "rxjs/operators";
 import { AuthResponse } from "../models/auth-response";
 import { User } from "../models/user";
 import { AuthRequest } from "../models/auth-request";
+import { RegisterRequest } from "../models/register-request";
 
 // import RxJS's from function, delayWhen operator and Ionic's storage provider.
 import {from } from "rxjs";
@@ -51,7 +52,7 @@ export class AuthService {
 
   logIn(authRequest: AuthRequest): Observable<User> {
 
-    const authUrl = `${environment.apiUrl}/auth`;
+    const authUrl = `${environment.apiUrl}auth`;
     return this.http.post<AuthResponse>(authUrl, authRequest).pipe(
       // Delay the observable stream while persisting the authentication response.
       delayWhen(auth => this.saveAuth(auth)),
@@ -63,6 +64,27 @@ export class AuthService {
     );
   }
 
+
+  register(name: String, password: String) {
+    const UserUrl = `${environment.apiUrl}users`;
+    return this.http.post<AuthResponse>(UserUrl,
+      {name: name, password: password}
+    )
+  }
+/*
+  Register(RegisterRequest: RegisterRequest ):Observable<User>{
+    
+    const authUrl = `${environment.apiUrl}/auth`;
+    return this.http.post<AuthResponse>(authUrl, RegisterRequest).pipe(
+      // Delay the observable stream while persisting the authentication response.
+      map(auth => {
+        this.authSource.next(auth);
+        console.log(`User ${auth.user.name} Register`);
+        return auth.user;
+      })
+    );
+  }
+*/
   logOut() {
     this.authSource.next();
   // Remove the stored authentication response from storage when logging out.
