@@ -26,3 +26,7 @@ body {
       border-radius: 0;
     }
   }
+.leaflet-popup{
+  position: relative !important;
+  bottom: 0;
+}
