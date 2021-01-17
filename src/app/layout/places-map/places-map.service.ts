@@ -30,4 +30,21 @@ export class PlaceMapService {
             this.locationChanged.next(transformedData);
         }); */
     }
+
+    getPlacesbyTripId(id?:string){
+
+       
+        return this.http.get<any>(`${environment.apiUrl}/places`).pipe(map(resData =>{
+            return resData.filter(place => place.tripId === id)
+        }));
+
+
+        /* this.http.get<any>(`${environment.apiUrl}/places`).pipe(map(resData =>{
+            return resData.map(place => place.location.coordinates)
+        }))
+        .subscribe(transformedData => {
+            console.log(transformedData);
+            this.locationChanged.next(transformedData);
+        }); */
+    }
 }
