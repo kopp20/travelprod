@@ -3,6 +3,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { environment } from "src/environments/environment";
 import { ImgurAlbumResponse } from 'src/app/models/imgur-album-response';
+import { ImgurImageResponse } from 'src/app/models/imgur-image-response';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,7 +13,7 @@ export class ImgurService {
 
   constructor(private http: HttpClient) {}
 
-  createAlbum(): Observable<any> {
+  createAlbum(): Observable<ImgurAlbumResponse> {
     const url = `${environment.imgurApiUrl}/album`;
     const body = {}
     const httpOptions = {
@@ -23,7 +24,7 @@ export class ImgurService {
     return this.http.post<ImgurAlbumResponse>(url, body, httpOptions);
   }
 
-  addPictureToAlbum(picture: any, albumId: string): Observable<any> {
+  addPictureToAlbum(picture: string, albumId: string): Observable<ImgurImageResponse> {
     const url = `${environment.imgurApiUrl}/image`;
     const body = {
       image: picture,
@@ -35,6 +36,6 @@ export class ImgurService {
         Authorization: `Client-ID ${environment.imgurId}`
       })
     }
-    return this.http.post<any>(url, body, httpOptions);
+    return this.http.post<ImgurImageResponse>(url, body, httpOptions);
   }
 }

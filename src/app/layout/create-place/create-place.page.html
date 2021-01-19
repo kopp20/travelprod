@@ -14,8 +14,8 @@
       <select value="trip" name="trip" [(ngModel)]='trip'>
         <option *ngFor="let trip of trips | keyvalue" [value]="trip.key">{{ trip.value.title }}</option>
       </select>
-      <ion-input type="text" name="newTripName" [(ngModel)]='newTripName' placeholder="Nom du voyage" [hidden]="trip"></ion-input>
-      <ion-input type="text" name="newTripDesc" [(ngModel)]='newTripDesc' placeholder="Description du voyage" [hidden]="trip"></ion-input>
+      <ion-input type="text" name="newTripName" [(ngModel)]='newTripName' placeholder="Nom du voyage" [hidden]="trip != 0"></ion-input>
+      <ion-input type="text" name="newTripDesc" [(ngModel)]='newTripDesc' placeholder="Description du voyage" [hidden]="trip != 0"></ion-input>
     </ion-item>
     
     <!-- Title -->

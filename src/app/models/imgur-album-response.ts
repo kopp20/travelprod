@@ -1,4 +1,8 @@
 export class ImgurAlbumResponse {
-    id: string;
-    deletehash: string;
+    data: {
+        id: string;
+        deletehash: string;
+    };
+    success: boolean;
+    status: number;
 }
