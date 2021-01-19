@@ -29,6 +29,10 @@ export class PhotoService {
     console.log(this.photos)
   }
 
+  public emptyPhotos() {
+    this.photos = []
+  }
+
   public async readAsBase64(photo: any) {
     // Fetch the photo, read as a blob, then convert to base64 format
     const response = await fetch(photo.webviewPath!);

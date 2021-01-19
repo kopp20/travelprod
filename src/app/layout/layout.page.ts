@@ -25,6 +25,7 @@ export class LayoutPage {
   }
   
   openCamera() {
+    this.photoService.emptyPhotos();
     this.photoService.takePicture();
   }
 }

@@ -25,16 +25,23 @@
 
     
     <!-- Pics -->
-    <ion-item>
+    <ion-item lines="none">
       <ion-label position="stacked">Photos</ion-label>
-    </ion-item>
-    <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
-      <ion-slide *ngFor="let photo of photoService.photos; index as position">
+      <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
+        <ion-slide *ngFor="let photo of photoService.photos; index as position">
           <ion-thumbnail>
             <ion-img [src]="photo.webviewPath"></ion-img>
           </ion-thumbnail>
-      </ion-slide>
-    </ion-slides>
+        </ion-slide>
+        <ion-slide>
+          <ion-thumbnail>
+            <ion-button color="none" class="add-pic-btn" (click)="openCamera()">
+              <ion-img src="https://i.imgur.com/IFKcpF2.png"></ion-img>
+            </ion-button>
+          </ion-thumbnail>
+        </ion-slide>
+      </ion-slides>
+  </ion-item>
   
     <!-- TODO MAP -->
     <ion-item>

@@ -98,4 +98,8 @@ export class CreatePlacePage implements OnInit {
       })
     })
   }
+
+  openCamera() {
+    this.photoService.takePicture();
+  }
 }

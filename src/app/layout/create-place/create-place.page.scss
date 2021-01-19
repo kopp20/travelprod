@@ -3,9 +3,24 @@ select {
 }
 
 ion-slide {
-    width: 25vw !important;
+    max-width: 25vw !important;
+    justify-content: start;
 }
 ion-thumbnail {
     width: 18vw;
     height: 18vw;
+}
+ion-slides {
+    margin: 0;
+    width: 100%;
+}
+.add-pic-btn {
+    height: 100%;
+    margin: 0;
+    --padding-start: 2px;
+    --padding-end: 2px;
+}
+.add-pic-btn img {
+    height: 100%;
+    width: 100%;
 }
