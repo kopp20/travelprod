@@ -11,5 +11,10 @@
 </ion-header>
 
 <ion-content>
-
+    <ion-list>
+     <ion-item *ngFor="let tripData of tripData;">
+      <span>{{ tripData.title }}</span>
+      <span>{{ tripData.createdAt }}</span>
+     </ion-item>
+    </ion-list>
 </ion-content>

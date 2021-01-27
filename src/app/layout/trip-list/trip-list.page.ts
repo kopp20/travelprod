@@ -4,6 +4,11 @@ import { ViewDidEnter } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
 import { environment } from "src/environments/environment";
 import { Router } from "@angular/router";
+import { TripListService } from './trip-list.service';
+import { TripListPageModule } from './trip-list.module';
+import { title } from 'process';
+import { map } from 'rxjs/operators';
+
 
 
 @Component({
@@ -17,15 +22,24 @@ export class TripListPage implements ViewDidEnter {
     // TODO: inject the HTTP client.
     public http: HttpClient,
         // Inject the router
-    private router: Router
+    private router: Router,
+    
+    private triplistservice : TripListService 
   ) {}
+  
+
+  tripData : Array<any>;
 
   ionViewDidEnter(): void {
+
     // Make an HTTP request to retrieve the trips.
-    const url = `${environment.apiUrl}/trip`;
+    const url = `${environment.apiUrl}/trips?user=${userId}`;
     this.http.get(url).subscribe((trips) => {
       console.log(`Trips loaded`, trips);
-    });
+      this.tripData = trips ;
+
+      console.log(this.tripData)
+    })
   }
 
   ngOnInit() {
