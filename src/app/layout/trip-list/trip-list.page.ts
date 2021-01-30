@@ -17,6 +17,9 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./trip-list.page.scss'],
 })
 export class TripListPage implements ViewDidEnter {
+
+  tripData : Array<any> 
+
   constructor(
     private auth: AuthService,
     // TODO: inject the HTTP client.
@@ -25,22 +28,16 @@ export class TripListPage implements ViewDidEnter {
     private router: Router,
     
     private triplistservice : TripListService 
-  ) {}
-  
-
-  tripData : Array<any>;
-
-  ionViewDidEnter(): void {
-
-    // Make an HTTP request to retrieve the trips.
-    const url = `${environment.apiUrl}/trips?user=${userId}`;
-    this.http.get(url).subscribe((trips) => {
-      console.log(`Trips loaded`, trips);
-      this.tripData = trips ;
-
-      console.log(this.tripData)
-    })
+  ) {
+    triplistservice.getCurrentUserTrips().subscribe(trips =>{
+       this.tripData = trips;
+      })
   }
+
+    ionViewDidEnter(): void {
+
+    }
+
 
   ngOnInit() {
   }

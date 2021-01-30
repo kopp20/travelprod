@@ -12,9 +12,12 @@
 
 <ion-content>
     <ion-list>
-     <ion-item *ngFor="let tripData of tripData;">
-      <span>{{ tripData.title }}</span>
-      <span>{{ tripData.createdAt }}</span>
+     <ion-item *ngFor="let tripData of tripData">
+     <ul>
+        <li>Nom : {{ tripData.title }}</li>
+        <li >date : {{ tripData.createdAt }}</li>
+        <li><button ion-item>{{ tripData.placesCount }} étapes </button></li>
+    </ul>
      </ion-item>
     </ion-list>
 </ion-content>
