@@ -11,13 +11,28 @@
 </ion-header>
 
 <ion-content>
+
+    <h1>Mes voyages</h1>
+
     <ion-list>
      <ion-item *ngFor="let tripData of tripData">
      <ul>
         <li>Nom : {{ tripData.title }}</li>
         <li >date : {{ tripData.createdAt }}</li>
-        <li><button ion-item>{{ tripData.placesCount }} étapes </button></li>
+        <li><button ion-item (click)="showPlaces(tripData.id)">{{ tripData.placesCount }} étapes </button></li>
     </ul>
      </ion-item>
     </ion-list>
+
+    <h1>étapes</h1>
+
+    <ion-list>
+      <ion-item *ngFor="let placeData of placeData">
+      <ul>
+         <li>Nom : {{ placeData.name}}</li>
+         <li>Trip : {{ tripName.title}}</li>
+         <li>Date : {{ placeData.createdAt}}</li>
+     </ul>
+      </ion-item>
+     </ion-list>
 </ion-content>

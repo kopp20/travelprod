@@ -5,6 +5,7 @@ import {map} from 'rxjs/operators';
 import{Observable, Subject} from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
 import { TripResponse } from '../../models/trip-response';
+import { PlaceResponse } from '../../models/place-response';
 
 
 @Injectable({providedIn:'root'})
@@ -17,15 +18,26 @@ export class TripListService {
         let userId: string;
         this.authService.getUserId().subscribe(id => {
           userId = id;
-          console.log(id)
         }, err => {
           console.warn('Could not get user id', err);
         });
         // Make an HTTP request to retrieve the trips.
         const url = `${environment.apiUrl}/trips?user=${userId}`;
+        console.log(url)
         return this.http.get<TripResponse[]>(url); 
-      
+  }
+
+  getCurrentTrip(tripId): Observable<PlaceResponse[]> {
+    const url = `${environment.apiUrl}/places?trip=${tripId}`;
+    console.log(url)
+    return this.http.get<PlaceResponse[]>(url); 
+  }
+  getCurrentTripname(tripId): Observable<TripResponse[]> {
+    const url = `${environment.apiUrl}/trips/${tripId}`;
+    console.log(url)
+    return this.http.get<TripResponse[]>(url); 
+  }
+
 
   
-  }
 }
