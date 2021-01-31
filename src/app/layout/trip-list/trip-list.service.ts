@@ -38,6 +38,19 @@ export class TripListService {
     return this.http.get<TripResponse[]>(url); 
   }
 
+  getsearchTrip(tripname): Observable<TripResponse[]> {
+    const url = `${environment.apiUrl}/trips?title=${tripname}`;
+    console.log(url)
+    return this.http.get<TripResponse[]>(url); 
+  }
+
+  getPlaceView(placepId): Observable<PlaceResponse[]> {
+    const url = `${environment.apiUrl}/places/${placepId}`;
+    console.log(url)
+    return this.http.get<PlaceResponse[]>(url); 
+  }
+
+
 
   
 }

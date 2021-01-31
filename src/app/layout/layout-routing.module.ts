@@ -27,8 +27,12 @@ const routes: Routes = [
     }
 
     ]
+  },  {
+    path: 'place-view',
+    loadChildren: () => import('./place-view/place-view.module').then( m => m.PlaceViewPageModule)
   },
-  
+
+
 ];
 
 @NgModule({

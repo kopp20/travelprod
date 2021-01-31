@@ -21,6 +21,8 @@ export class TripListPage implements ViewDidEnter {
   tripData : Array<any> 
   placeData : Array<any>
   tripName : any
+  searchTitle : any
+
   constructor(
     private auth: AuthService,
     // TODO: inject the HTTP client.
@@ -51,8 +53,20 @@ export class TripListPage implements ViewDidEnter {
     })
   }
 
+  searchTrip(){
+    this.searchTitle
+    this.triplistservice.getsearchTrip(this.searchTitle).subscribe(trip=>{
+      this.tripData = trip;
+    })
+  }
+
   ngOnInit() {
   }
+
+  goPageView(placeId){
+    this.router.navigateByUrl(`place-view/${placeId}`);
+  }
+
   logOut() {
     console.log("logging out...");
     this.auth.logOut();
