@@ -44,7 +44,7 @@
   .popup-fixed .leaflet-popup-content-wrapper {
     border-radius: 10px 10px 0 0;
     height: 30vh;
-    padding: 0 20px;
+    padding: 0 20px 2em 20px;
   }
 
 
@@ -83,12 +83,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: .5em;
+    padding-top: 1em;
   }
   ._content-bottom{
     min-height: 50%;
     display: flex;
-    padding-top: 1.5em;
+    padding-top: 1.4vh;
+    padding-bottom: .3em;
   }
   ._img img{
     object-fit: cover;
@@ -133,7 +134,7 @@
     font-weight: bold;
     color: rgb(182, 93, 194);
     font-size: 1.3em;
-    margin-right: .5em;
+    margin-right: 1em;
   }
 
   .before_wrapper > p, .after_wrapper > p{
