@@ -1,32 +1,14 @@
 html,
 body {
   height: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+#mapid{
+    height: 100%;
 }
 
 
-#map{
-    min-height: 100%;
-}
 
-.popup-fixed {
-    position: fixed;
-    top: auto;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    transform: none !important;
-    margin: 0;
-    border-radius: 0;
-    
-    .leaflet-popup-tip-container {
-      display: none;
-    }
-    
-    .leaflet-popup-content-wrapper {
-      border-radius: 0;
-    }
-  }
-.leaflet-popup{
-  position: relative !important;
-  bottom: 0;
-}

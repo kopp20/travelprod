@@ -17,7 +17,7 @@ export class PlaceMapService {
     getMarkersbyTripId(id?:string){
 
        
-        return this.http.get<any>(`${environment.apiUrl}/places`).pipe(map(resData =>{
+        return this.http.get<any>(`${environment.apiUrl}/api/places`).pipe(map(resData =>{
             return resData.filter(place => place.tripId === id).map(place => place.location.coordinates)
         }));
 
@@ -34,9 +34,24 @@ export class PlaceMapService {
     getPlacesbyTripId(id?:string){
 
        
-        return this.http.get<any>(`${environment.apiUrl}/places`).pipe(map(resData =>{
+        return this.http.get<any>(`${environment.apiUrl}/api/places`).pipe(map(resData =>{
             return resData.filter(place => place.tripId === id)
         }));
+
+
+        /* this.http.get<any>(`${environment.apiUrl}/places`).pipe(map(resData =>{
+            return resData.map(place => place.location.coordinates)
+        }))
+        .subscribe(transformedData => {
+            console.log(transformedData);
+            this.locationChanged.next(transformedData);
+        }); */
+    }
+
+    getTripByTripHref(href?:string){
+
+       
+        return this.http.get<any>(environment.apiUrl+href);
 
 
         /* this.http.get<any>(`${environment.apiUrl}/places`).pipe(map(resData =>{
