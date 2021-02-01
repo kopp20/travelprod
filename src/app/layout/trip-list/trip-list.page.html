@@ -27,6 +27,7 @@
      <ul>
         <li>Nom : {{ tripData.title }}</li>
         <li >date : {{ tripData.createdAt }}</li>
+        <li><button ion-item (click)="goPageViewTrip(tripData.id)">Page voyages </button></li>
         <li><button ion-item (click)="showPlaces(tripData.id)">{{ tripData.placesCount }} étapes </button></li>
     </ul>
      </ion-item>

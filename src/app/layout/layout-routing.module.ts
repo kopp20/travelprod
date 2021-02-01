@@ -24,12 +24,24 @@ const routes: Routes = [
       path: '',
       redirectTo: "places-map",
       pathMatch: "full"
-    }
-
+    },
+    {
+      path: 'place-view',
+      loadChildren: () => import('./place-view/place-view.module').then( m => m.PlaceViewPageModule)
+    },
+    {
+      path: 'trip-view',
+      loadChildren: () => import('./trip-view/trip-view.module').then( m => m.TripViewPageModule)
+    },
     ]
-  },  {
-    path: 'place-view',
+  },
+  {
+     path: 'place-view',
     loadChildren: () => import('./place-view/place-view.module').then( m => m.PlaceViewPageModule)
+  },
+  {
+    path: 'trip-view',
+    loadChildren: () => import('./trip-view/trip-view.module').then( m => m.TripViewPageModule)
   },
 
 

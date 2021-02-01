@@ -8,6 +8,7 @@ import { TripListService } from './trip-list.service';
 import { TripListPageModule } from './trip-list.module';
 import { title } from 'process';
 import { map } from 'rxjs/operators';
+import { viewClassName } from '@angular/compiler';
 
 
 
@@ -64,7 +65,13 @@ export class TripListPage implements ViewDidEnter {
   }
 
   goPageView(placeId){
-    this.router.navigateByUrl(`place-view/${placeId}`);
+    /*this.router.navigateByUrl(`/place-view/${placeId}`);*/
+    this.router.navigate([`place-view/${placeId}`])
+  }
+
+  goPageViewTrip(tripId){
+    this.router.navigateByUrl(`/trip-view/${tripId}`);
+    /*this.router.navigate([`trip-view/${tripId}`])*/
   }
 
   logOut() {

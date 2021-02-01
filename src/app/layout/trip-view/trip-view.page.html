@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{ placeData.name}}</ion-title>
+    <ion-title>{{ tripData.title }}</ion-title>
      <!-- Logout button -->
      <ion-buttons slot="end">
       <ion-button (click)="logOut()">
@@ -11,9 +11,19 @@
 </ion-header>
 
 <ion-content>
+<ion-list>
+ <ion-item>
+ <ul>
+    <li>Date {{tripData.createdAt}}</li>
+    <li >description : {{ tripData.description }}</li>
+</ul>
+ </ion-item>
+</ion-list>
+  <h1>Étapes</h1>
   <ion-list>
-    <ion-item >
+    <ion-item *ngFor="let placeData of placeData">
     <ul>
+       <li>Nom : {{ placeData.name}}</li>
        <li>description : {{ placeData.description}}</li> 
        <li>Date : {{ placeData.createdAt}}</li> 
    </ul>

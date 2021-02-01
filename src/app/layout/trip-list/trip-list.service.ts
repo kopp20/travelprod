@@ -50,6 +50,12 @@ export class TripListService {
     return this.http.get<PlaceResponse[]>(url); 
   }
 
+  getTripView(trippId): Observable<PlaceResponse[]> {
+    const url = `${environment.apiUrl}/trips/${trippId}`;
+    console.log(url)
+    return this.http.get<PlaceResponse[]>(url); 
+  }
+
 
 
   

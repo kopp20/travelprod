@@ -5,15 +5,15 @@ import { ViewDidEnter } from '@ionic/angular';
 import { TripListService } from '../trip-list/trip-list.service';
 import { AuthService } from 'src/app/auth/auth.service';
 
-
 @Component({
-  selector: 'app-place-view',
-  templateUrl: './place-view.page.html',
-  styleUrls: ['./place-view.page.scss'],
+  selector: 'app-trip-view',
+  templateUrl: './trip-view.page.html',
+  styleUrls: ['./trip-view.page.scss'],
 })
-export class PlaceViewPage implements ViewDidEnter {
+export class TripViewPage implements ViewDidEnter {
   id: any;
-  placeData : Array<any>;
+  tripData : Array<any>;
+  placeData : Array<any>
   constructor(
     private route: ActivatedRoute,
     private router : Router,
@@ -21,21 +21,21 @@ export class PlaceViewPage implements ViewDidEnter {
     private triplistservice : TripListService,
     private auth: AuthService,
     // TODO: inject the HTTP client.
-  ) {
+  ) { 
     this.id = this.route.snapshot.paramMap.get('id'); 
-    this.triplistservice.getPlaceView(this.id).subscribe(place=>{
-    this.placeData = place;
-  })
-}
+    this.triplistservice.getTripView(this.id).subscribe(trip=>{
+    this.tripData = trip;})
+
+    this.triplistservice.getCurrentTrip(this.id).subscribe(places=>{
+      this.placeData = places;})
+  }
+
 
   ionViewDidEnter(): void {
 
   }
+  ngOnInit() {}
 
-
-  ngOnInit() {
-
-  }
   logOut() {
     console.log("logging out...");
     this.auth.logOut();
