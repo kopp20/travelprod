@@ -17,49 +17,31 @@ export class PlaceMapService {
     getMarkersbyTripId(id?:string){
 
        
-        return this.http.get<any>(`${environment.apiUrl}/api/places`).pipe(map(resData =>{
+        return this.http.get<any>(`https://kasslaprod-travel-log.herokuapp.com/api/places`).pipe(map(resData =>{
             return resData.filter(place => place.tripId === id).map(place => place.location.coordinates)
         }));
 
 
-        /* this.http.get<any>(`${environment.apiUrl}/places`).pipe(map(resData =>{
-            return resData.map(place => place.location.coordinates)
-        }))
-        .subscribe(transformedData => {
-            console.log(transformedData);
-            this.locationChanged.next(transformedData);
-        }); */
+       
     }
 
     getPlacesbyTripId(id?:string){
 
        
-        return this.http.get<any>(`${environment.apiUrl}/api/places`).pipe(map(resData =>{
+        return this.http.get<any>(`https://kasslaprod-travel-log.herokuapp.com/api/places`).pipe(map(resData =>{
             return resData.filter(place => place.tripId === id)
         }));
 
 
-        /* this.http.get<any>(`${environment.apiUrl}/places`).pipe(map(resData =>{
-            return resData.map(place => place.location.coordinates)
-        }))
-        .subscribe(transformedData => {
-            console.log(transformedData);
-            this.locationChanged.next(transformedData);
-        }); */
+     
     }
 
     getTripByTripHref(href?:string){
 
        
-        return this.http.get<any>(environment.apiUrl+href);
+        return this.http.get<any>(`https://kasslaprod-travel-log.herokuapp.com${href}`);
 
 
-        /* this.http.get<any>(`${environment.apiUrl}/places`).pipe(map(resData =>{
-            return resData.map(place => place.location.coordinates)
-        }))
-        .subscribe(transformedData => {
-            console.log(transformedData);
-            this.locationChanged.next(transformedData);
-        }); */
+        
     }
 }
