@@ -45,6 +45,10 @@ export class AuthService {
   getUser(): Observable<User> {
     return this.auth$.pipe(map((auth) => auth?.user));
   }
+  
+  getUserId(): Observable<string> {
+    return this.auth$.pipe(map((auth) => auth?.user.id));
+  }
 
   getUserId(): Observable<string> {
     return this.auth$.pipe(map((auth) => auth?.user.id));
@@ -56,7 +60,7 @@ export class AuthService {
 
   logIn(authRequest: AuthRequest): Observable<User> {
 
-    const authUrl = `https://kasslaprod-travel-log.herokuapp.com/api/auth`;
+    const authUrl = `${environment.apiUrl}/auth`;
     return this.http.post<AuthResponse>(authUrl, authRequest).pipe(
       // Delay the observable stream while persisting the authentication response.
       delayWhen(auth => this.saveAuth(auth)),
@@ -70,7 +74,7 @@ export class AuthService {
 
 
   register(name: String, password: String) {
-    const UserUrl = `https://kasslaprod-travel-log.herokuapp.com/api/users`;
+    const UserUrl = `${environment.apiUrl}/users`;
     return this.http.post<AuthResponse>(UserUrl,
       {name: name, password: password}
     )
