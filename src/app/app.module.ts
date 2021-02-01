@@ -18,10 +18,12 @@ import { IonicStorageModule } from "@ionic/storage";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AuthInterceptorService } from "./auth/auth-interceptor.service";
 
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,  HttpClientModule,IonicStorageModule.forRoot()],
+  imports: [LeafletModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule,  HttpClientModule,IonicStorageModule.forRoot()],
   providers: [
     StatusBar,
     SplashScreen,
