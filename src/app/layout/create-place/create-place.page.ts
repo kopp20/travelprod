@@ -54,7 +54,14 @@ export class CreatePlacePage implements OnInit {
     let newImgurAlbum:ImgurAlbum
     await this.imgurUpload().then(album => {
       newImgurAlbum = album
-    }).catch(err => console.error(err))
+    }).catch(err => {
+      console.error(err)
+      // If there is an error with the imgur API, use a default album as image for the place
+      newImgurAlbum = {
+        id: "yJBS6nN",
+        deletehash: "osef"
+      }
+    })
 
     if(this.trip == 0) {
       // Retrieve the newly created trip and add it to the trips array
@@ -111,6 +118,7 @@ export class CreatePlacePage implements OnInit {
         })
       }, err => {
         reject("Could not create an imgur album")
+
       })
     })
   }
