@@ -50,10 +50,6 @@ export class AuthService {
     return this.auth$.pipe(map((auth) => auth?.user.id));
   }
 
-  getUserId(): Observable<string> {
-    return this.auth$.pipe(map((auth) => auth?.user.id));
-  }
-
   getToken(): Observable<string> {
     return this.auth$.pipe(map((auth) => auth?.token));
   }

@@ -17,6 +17,10 @@ const routes: Routes = [
       loadChildren: () => import('./places-map/places-map.module').then( m => m.PlacesMapPageModule)
     },
     {
+      path: 'trip-list',
+      loadChildren: () => import('./trip-list/trip-list.module').then( m => m.TripListPageModule)
+    },
+    {
       path: 'create-place',
       loadChildren: () => import('./create-place/create-place.module').then( m => m.CreatePlacePageModule)
     },
