@@ -21,6 +21,10 @@ const routes: Routes = [
       loadChildren: () => import('./trip-list/trip-list.module').then( m => m.TripListPageModule)
     },
     {
+      path: 'create-place',
+      loadChildren: () => import('./create-place/create-place.module').then( m => m.CreatePlacePageModule)
+    },
+    {
       path: '',
       redirectTo: "places-map",
       pathMatch: "full"
@@ -34,6 +38,10 @@ const routes: Routes = [
       loadChildren: () => import('./trip-view/trip-view.module').then( m => m.TripViewPageModule)
     },
     ]
+  },
+  {
+    path: 'take-picture',
+    loadChildren: () => import('./take-picture/take-picture.module').then( m => m.TakePicturePageModule)
   },
   {
      path: 'place-view',

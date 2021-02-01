@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create Place</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form (submit)="createPlace()">
+
+    <!-- Trip -->
+    <ion-item>
+      <ion-label position="stacked">Voyage</ion-label>
+      <select value="trip" name="trip" [(ngModel)]='trip'>
+        <option *ngFor="let trip of trips | keyvalue" [value]="trip.key">{{ trip.value.title }}</option>
+      </select>
+      <ion-input type="text" name="newTripName" [(ngModel)]='newTripName' placeholder="Nom du voyage" [hidden]="trip != 0"></ion-input>
+      <ion-input type="text" name="newTripDesc" [(ngModel)]='newTripDesc' placeholder="Description du voyage" [hidden]="trip != 0"></ion-input>
+    </ion-item>
+    
+    <!-- Title -->
+    <ion-item>
+      <ion-input type="text" placeholder="Titre de l'étape" name="title" maxlength="64" required [(ngModel)]="title"></ion-input>
+    </ion-item>
+
+    
+    <!-- Pics -->
+    <ion-item lines="none">
+      <ion-label position="stacked">Photos</ion-label>
+      <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
+        <ion-slide *ngFor="let photo of photoService.photos; index as position">
+          <ion-thumbnail>
+            <ion-img [src]="photo.webviewPath"></ion-img>
+          </ion-thumbnail>
+        </ion-slide>
+        <ion-slide>
+          <ion-thumbnail>
+            <ion-button color="none" class="add-pic-btn" (click)="openCamera()">
+              <ion-img src="https://i.imgur.com/IFKcpF2.png"></ion-img>
+            </ion-button>
+          </ion-thumbnail>
+        </ion-slide>
+      </ion-slides>
+  </ion-item>
+  
+    <!-- TODO MAP -->
+    <ion-item>
+      <ion-label position="stacked">Localisation</ion-label>
+    </ion-item>
+
+    <!-- Description -->
+    <ion-item>
+      <ion-label position="stacked">Description</ion-label>
+      <ion-input type="text" name="description" [(ngModel)]="description"></ion-input>
+    </ion-item>
+
+    <!-- Buttons -->
+    <ion-button (click)="imgurUpload()">Test</ion-button>
+    <ion-button type="submit">Ajouter</ion-button>
+
+    <br>
+    <ion-note color="danger" *ngFor="let error of errors">{{ error }}<br></ion-note>
+  </form>
+
+</ion-content>
