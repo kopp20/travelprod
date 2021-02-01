@@ -8,6 +8,7 @@ import { PhotoService } from '../../services/photo.service';
 import { PlaceService } from '../../services/place.service';
 import { TripService } from '../../services/trip.service';
 import { ImgurService } from '../../services/imgur.service';
+import { Router } from '@angular/router';
 
 const { Geolocation } = Plugins;
 
@@ -29,7 +30,7 @@ export class CreatePlacePage implements OnInit {
 
   trips: (TripResponse)[]= [{title: "+ Nouveau voyage", href:"", id:"", description:"", placesCount: 0, userHref:"", userId: "", createdAt: new Date(0), updatedAt: new Date(0)}]
 
-  constructor(public photoService: PhotoService, public placeService: PlaceService, public tripService: TripService, public imgurService: ImgurService) {
+  constructor(public photoService: PhotoService, public placeService: PlaceService, public tripService: TripService, public imgurService: ImgurService, private router: Router) {
     // Fetch user's trips and add them to the trips dropdown
     tripService.getCurrentUserTrips().subscribe(trips => {
       this.trips.push(...trips)
@@ -91,6 +92,7 @@ export class CreatePlacePage implements OnInit {
 
     this.placeService.createPlace(newPlace).subscribe((place) => {
       console.log("SUCCESS", place);
+      this.router.navigateByUrl(`/place-view/${place.id}`)
     }, (err) => {
       for(let elem in err.error.errors) {
         this.errors.push(err.error.errors[elem].message)
