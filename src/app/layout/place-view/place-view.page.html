@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ placeData.name}}</ion-title>
+     <!-- Logout button -->
+     <ion-buttons slot="end">
+      <ion-button (click)="logOut()">
+        <ion-icon name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item >
+    <ul>
+       <li>description : {{ placeData.description}}</li> 
+       <li>Date : {{ placeData.createdAt}}</li> 
+   </ul>
+    </ion-item>
+   </ion-list>
+</ion-content>

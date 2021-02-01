@@ -1,9 +1,15 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>PlacesMap</ion-title>
+    <!-- Logout button -->
+    <ion-buttons slot="end">
+      <ion-button (click)="logOut()">
+        <ion-icon name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content [fullscreen]="true">
+  <div style="z-index: -1;" id="mapid" leaflet [leafletOptions]="mapOptions" (leafletMapReady)="onMapReady($event)" leafletEdgeBuffer [leafletLayers]="mapMarkers"></div>
 </ion-content>
