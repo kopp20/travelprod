@@ -46,13 +46,21 @@
     <div class="ion-padding">
       <!-- Submit button -->
       <ion-button type="submit" expand="block" [disabled]="loginForm.invalid"
-        >Log in</ion-button
-      >
+        >Log in</ion-button>
   
       <!-- Error message displayed if the login failed -->
       <ion-text color="danger" *ngIf="loginError"
         >Username or password is invalid.</ion-text
       >
     </div>
+
+    <ion-row>
+      <div text-center>
+    If you don't have an account, please <a routerLink='/register'>
+      register</a> first!
+      </div>
+  </ion-row>
+
+  
   </form>
 </ion-content>
