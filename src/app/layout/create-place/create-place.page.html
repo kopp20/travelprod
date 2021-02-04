@@ -6,12 +6,12 @@
 
 <ion-content>
 
-  <form (submit)="createPlace()">
+  <form (submit)="createPlace()" id="create-place-form">
 
     <!-- Trip -->
-    <ion-item>
+    <ion-item lines="none" id="item-trip">
       <ion-label position="stacked">Voyage</ion-label>
-      <select value="trip" name="trip" [(ngModel)]='trip'>
+      <select value="trip" name="trip" [(ngModel)]='trip' id="select-trip">
         <option *ngFor="let trip of trips | keyvalue" [value]="trip.key">{{ trip.value.title }}</option>
       </select>
       <ion-input type="text" name="newTripName" [(ngModel)]='newTripName' placeholder="Nom du voyage" [hidden]="trip != 0"></ion-input>
@@ -19,13 +19,13 @@
     </ion-item>
     
     <!-- Title -->
-    <ion-item>
+    <ion-item lines="none" id="item-title">
       <ion-input type="text" placeholder="Titre de l'étape" name="title" maxlength="64" required [(ngModel)]="title"></ion-input>
     </ion-item>
 
     
     <!-- Pics -->
-    <ion-item lines="none">
+    <ion-item lines="none" id="item-pics">
       <ion-label position="stacked">Photos</ion-label>
       <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
         <ion-slide *ngFor="let photo of photoService.photos; index as position">
@@ -44,19 +44,20 @@
   </ion-item>
   
     <!-- TODO MAP -->
-    <ion-item>
+    <ion-item lines="none">
       <ion-label position="stacked">Localisation</ion-label>
     </ion-item>
 
     <!-- Description -->
-    <ion-item>
+    <ion-item lines="none" id="item-description">
       <ion-label position="stacked">Description</ion-label>
-      <ion-input type="text" name="description" [(ngModel)]="description"></ion-input>
+      <ion-textarea rows="5" name="description" [(ngModel)]="description"></ion-textarea>
     </ion-item>
 
     <!-- Buttons -->
-    <ion-button (click)="imgurUpload()">Test</ion-button>
-    <ion-button type="submit">Ajouter</ion-button>
+    <ion-item lines="none" id="item-submit">
+      <ion-button type="submit" color="tertiary">Ajouter</ion-button>
+    </ion-item>
 
     <br>
     <ion-note color="danger" *ngFor="let error of errors">{{ error }}<br></ion-note>

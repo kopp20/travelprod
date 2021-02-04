@@ -92,7 +92,12 @@ export class CreatePlacePage implements OnInit {
 
     this.placeService.createPlace(newPlace).subscribe((place) => {
       console.log("SUCCESS", place);
-      this.router.navigateByUrl(`/place-view/${place.id}`)
+      this.newTripName = ""
+      this.newTripDesc = ""
+      this.title = ""
+      this.description = ""
+      this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+      this.router.navigate(['/place-view', place.id]));
     }, (err) => {
       for(let elem in err.error.errors) {
         this.errors.push(err.error.errors[elem].message)
