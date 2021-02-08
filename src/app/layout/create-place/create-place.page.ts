@@ -9,6 +9,9 @@ import { PlaceService } from '../../services/place.service';
 import { TripService } from '../../services/trip.service';
 import { ImgurService } from '../../services/imgur.service';
 import { Router } from '@angular/router';
+import * as L from 'leaflet';
+import { latLng, MapOptions, tileLayer, marker, Marker, Polyline, polyline } from 'leaflet';
+import { defaultIcon } from '../places-map/default-marker';
 
 const { Geolocation } = Plugins;
 
@@ -24,11 +27,14 @@ export class CreatePlacePage implements OnInit {
   newTripDesc: string
   title: string
   currentLocation: Object
-  
+
   description: string
   errors: string[] = []
 
-  trips: (TripResponse)[]= [{title: "+ Nouveau voyage", href:"", id:"", description:"", placesCount: 0, userHref:"", userId: "", createdAt: new Date(0), updatedAt: new Date(0)}]
+  mapOptions: MapOptions;
+  map: L.Map;
+
+  trips: (TripResponse)[] = [{ title: "+ Nouveau voyage", href: "", id: "", description: "", placesCount: 0, userHref: "", userId: "", createdAt: new Date(0), updatedAt: new Date(0) }]
 
   constructor(public photoService: PhotoService, public placeService: PlaceService, public tripService: TripService, public imgurService: ImgurService, private router: Router) {
     // Fetch user's trips and add them to the trips dropdown
@@ -39,20 +45,42 @@ export class CreatePlacePage implements OnInit {
     Geolocation.getCurrentPosition().then(coord => {
       this.currentLocation = {
         type: "Point",
-        coordinates: [ coord.coords.latitude, coord.coords.longitude]
+        coordinates: [coord.coords.latitude, coord.coords.longitude]
       }
+
+      let map = L.map('_mapId');
+      map.setView([coord.coords.latitude, coord.coords.longitude], 16);
+      L.tileLayer(
+        'https://{s}.tile.jawg.io/jawg-dark/{z}/{x}/{y}{r}.png?access-token=CLh9srebP4AGiZBhlqC1Ru2R0EuX5ywlP45a9Pm01VP3mdImGZz2rqdP2deHhGaq',
+        {
+          accessToken: 'CLh9srebP4AGiZBhlqC1Ru2R0EuX5ywlP45a9Pm01VP3mdImGZz2rqdP2deHhGaq'
+          , maxZoom: 19
+        }
+      ).addTo(map);
+      L.marker([coord.coords.latitude, coord.coords.longitude], {icon : defaultIcon}).addTo(map);
       console.log(this.currentLocation)
+
     }).catch(err => console.error(err));
+
   }
 
   ngOnInit() {
+
+
+
   }
+
+  onMapReady(map: L.Map) {
+    setTimeout(() => map.invalidateSize(), 0);
+  }
+
+
 
   async createPlace() {
     this.errors = []
 
     // Retrieve the newly created imgur album
-    let newImgurAlbum:ImgurAlbum
+    let newImgurAlbum: ImgurAlbum
     await this.imgurUpload().then(album => {
       newImgurAlbum = album
     }).catch(err => {
@@ -64,7 +92,7 @@ export class CreatePlacePage implements OnInit {
       }
     })
 
-    if(this.trip == 0) {
+    if (this.trip == 0) {
       // Retrieve the newly created trip and add it to the trips array
       let newTrip: TripResponse
       await this.tripService.createTrip({
@@ -73,12 +101,12 @@ export class CreatePlacePage implements OnInit {
       }).toPromise().then(trip => {
         newTrip = trip
       }).catch(err => {
-        for(let elem in err.error.errors) {
+        for (let elem in err.error.errors) {
           this.errors.push(err.error.errors[elem].message)
         }
       })
       this.trips.push(newTrip)
-      this.trip = this.trips.length -1
+      this.trip = this.trips.length - 1
     }
 
     let newPlace: Place = {
@@ -96,10 +124,10 @@ export class CreatePlacePage implements OnInit {
       this.newTripDesc = ""
       this.title = ""
       this.description = ""
-      this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-      this.router.navigate(['/place-view', place.id]));
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+        this.router.navigate(['/place-view', place.id]));
     }, (err) => {
-      for(let elem in err.error.errors) {
+      for (let elem in err.error.errors) {
         this.errors.push(err.error.errors[elem].message)
       }
     })
@@ -107,9 +135,9 @@ export class CreatePlacePage implements OnInit {
 
   imgurUpload(): Promise<ImgurAlbum> {
     // Creation of the imgur album
-    return new Promise ((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       this.imgurService.createAlbum().subscribe(album => {
-        console.log("created album: "+JSON.stringify(album))
+        console.log("created album: " + JSON.stringify(album))
         // Creation of the imgur images directly inside the previously created album
         this.photoService.photos.forEach(async photo => {
           // Firtly, convert the blob image to a base64 (jpeg) file
