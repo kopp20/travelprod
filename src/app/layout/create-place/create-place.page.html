@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-
+  
   <form (submit)="createPlace()" id="create-place-form">
 
     <!-- Trip -->
@@ -14,16 +14,19 @@
       <select value="trip" name="trip" [(ngModel)]='trip' id="select-trip">
         <option *ngFor="let trip of trips | keyvalue" [value]="trip.key">{{ trip.value.title }}</option>
       </select>
-      <ion-input type="text" name="newTripName" [(ngModel)]='newTripName' placeholder="Nom du voyage" [hidden]="trip != 0"></ion-input>
-      <ion-input type="text" name="newTripDesc" [(ngModel)]='newTripDesc' placeholder="Description du voyage" [hidden]="trip != 0"></ion-input>
-    </ion-item>
-    
-    <!-- Title -->
-    <ion-item lines="none" id="item-title">
-      <ion-input type="text" placeholder="Titre de l'étape" name="title" maxlength="64" required [(ngModel)]="title"></ion-input>
+      <ion-input type="text" name="newTripName" [(ngModel)]='newTripName' placeholder="Nom du voyage"
+        [hidden]="trip != 0"></ion-input>
+      <ion-input type="text" name="newTripDesc" [(ngModel)]='newTripDesc' placeholder="Description du voyage"
+        [hidden]="trip != 0"></ion-input>
     </ion-item>
 
-    
+    <!-- Title -->
+    <ion-item lines="none" id="item-title">
+      <ion-input type="text" placeholder="Titre de l'étape" name="title" maxlength="64" required [(ngModel)]="title">
+      </ion-input>
+    </ion-item>
+
+
     <!-- Pics -->
     <ion-item lines="none" id="item-pics">
       <ion-label position="stacked">Photos</ion-label>
@@ -41,12 +44,17 @@
           </ion-thumbnail>
         </ion-slide>
       </ion-slides>
-  </ion-item>
-  
+    </ion-item>
+    
     <!-- TODO MAP -->
     <ion-item lines="none">
       <ion-label position="stacked">Localisation</ion-label>
+      
+ 
     </ion-item>
+    <div class="_wrapper-leaf">
+      <div class="leaflet-map" id="_mapId"  (leafletMapReady)="onMapReady($event)"></div>
+    </div>
 
     <!-- Description -->
     <ion-item lines="none" id="item-description">
