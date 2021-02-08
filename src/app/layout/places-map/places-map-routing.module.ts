@@ -5,7 +5,7 @@ import { PlacesMapPage } from './places-map.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':id',
     component: PlacesMapPage
   }
 ];

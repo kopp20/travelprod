@@ -1,5 +1,9 @@
 import { Component, OnDestroy, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { ActivatedRoute,Router } from '@angular/router';
 import * as L from 'leaflet';
+import { HttpClient } from "@angular/common/http";
+
+
 
 import { PlaceMapService } from './places-map.service';
 
@@ -21,11 +25,17 @@ export class PlacesMapPage implements OnInit, OnDestroy {
   myPlaces: any[] = new Array();
   markerList: any[] = new Array();
   map: L.Map;
-  markerId: string = "8f79cb4f-f3d7-473d-9bfe-31c85766f4ae";
+  markerId: any;
 
 
 
-  constructor(private plcMapService: PlaceMapService, public imgurService: ImgurService) {
+  constructor(
+    private plcMapService: PlaceMapService,
+    private route: ActivatedRoute,
+    public http: HttpClient,
+    public imgurService: ImgurService
+    ) {
+    this.markerId = this.route.snapshot.paramMap.get('id'); 
     this.mapOptions = {
       layers: [
         tileLayer(
