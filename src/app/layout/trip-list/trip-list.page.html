@@ -19,24 +19,16 @@
       <ion-icon name="search-sharp"></ion-icon>
     </ion-button>
   </ion-item>
-
-
-
-  <ion-list class="flex" >        
-    <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
-    <ion-item *ngFor="let tripData of tripData">
-      <ion-slide>
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title class="Trip-Title">{{ tripData.title }}</ion-card-title>
-          <ion-card-subtitle class="Trip-Date">{{ tripData.createdAt }}</ion-card-subtitle>
-        </ion-card-header>
+    <ion-list class="flex" >
+     <ion-item *ngFor="let tripData of tripData">
+       <div class="flex">
+        <ion-card >
+          <ion-img (click)="goPageViewTrip(tripData.id)" [src]="tripData.image"></ion-img>
+          <ion-card-header>
+            <ion-card-title class="Trip-Title">{{ tripData.title }}</ion-card-title>
+            <ion-card-subtitle class="Trip-Date">{{ tripData.createdAt }}</ion-card-subtitle>
+          </ion-card-header>
         <ion-card-content>
-          <ion-thumbnail>
-            <ion-button color="none" class="add-pic-btn" (click)="goPageViewTrip(tripData.id)">
-              <ion-img [src]="tripData.image"></ion-img>
-            </ion-button>
-          </ion-thumbnail>
           <ion-button  id="item-submit" ion-item (click)="showPlaces(tripData.id)" >{{ tripData.placesCount }} étapes</ion-button>
           </ion-card-content>
         </ion-card>
