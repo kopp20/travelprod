@@ -44,10 +44,10 @@ export class TripListService {
     return this.http.get<TripResponse[]>(url); 
   }
 
-  getPlaceView(placepId): Observable<PlaceResponse[]> {
+  getPlaceView(placepId): Observable<PlaceResponse> {
     const url = `${environment.apiUrl}/places/${placepId}`;
     console.log(url)
-    return this.http.get<PlaceResponse[]>(url); 
+    return this.http.get<PlaceResponse>(url); 
   }
 
   getTripView(trippId): Observable<PlaceResponse[]> {

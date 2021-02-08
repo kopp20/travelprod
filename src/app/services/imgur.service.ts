@@ -47,9 +47,11 @@ export class ImgurService {
     const url = `${album}/images`
     const httpOptions = {
       headers: new HttpHeaders({
-        Authorization: `Client-ID ${environment.imgurId}`
+        'Authorization': `Client-ID ${environment.imgurId}`
       })
-    }
+    };
+    console.log("httpOptions", httpOptions)
+    console.log("httpOptionsAuthorization", httpOptions.headers)
     return this.http.get<any>(url, httpOptions).pipe(map(image => image.link))
   }
 
