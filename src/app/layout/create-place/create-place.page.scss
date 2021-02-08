@@ -85,3 +85,16 @@ select {
         }
     }
 }
+
+#_mapId{
+    height: 15em;
+    z-index: 1000;
+    border-radius: 12px;
+    width: 90%;
+    
+}
+
+._wrapper-leaf{
+    display: flex;
+    justify-content: center;
+}

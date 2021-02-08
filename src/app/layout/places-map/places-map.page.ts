@@ -64,13 +64,16 @@ export class PlacesMapPage implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    console.log(this.markerId);
     this.plcMapService.getPlacesbyTripId(this.markerId).subscribe(result => {
       this.leafletMarkers(result);
       this.myPlaces = result
     })
 
     this.plcMapService.getMarkersbyTripId(this.markerId).subscribe(result => {
+      
       this.leafletLines(result);
+      console.log(result)
       this.map.flyTo(result[0], 18)
     })
   }
@@ -138,7 +141,7 @@ export class PlacesMapPage implements OnInit, OnDestroy {
           })
         }
         let content = `<div class="_wrapper"><div class="_content-top"><div class="_top-left"><div class="_img"><img src="${picture}" ></div><div class="_titre"><h4>${place.description}</h4>
-        <p>${result.title}</p><p>${newDate}</p></div></div><div class="top-right"><p class="_voir">voir</p></div></div><div class="_content-bottom">`;
+        <p>${result.title}</p><p>${newDate}</p></div></div><div class="top-right"><p class="_voir"></p></div></div><div class="_content-bottom">`;
 
 
         (before) ? content += `<div class="before_wrapper"><p>étape précédente</p><div class="before"><img src="${beforePicture}" ><p>${before.name}</p></div></div>` : content += `<div class="before_wrapper"><p>étape précédente</p><div><p></p></div></div>`;
