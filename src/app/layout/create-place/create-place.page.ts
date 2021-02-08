@@ -108,14 +108,16 @@ export class CreatePlacePage implements OnInit {
   imgurUpload(): Promise<ImgurAlbum> {
     // Creation of the imgur album
     return new Promise ((resolve, reject) => {
+      console.log("createAlbum()")
       this.imgurService.createAlbum().subscribe(album => {
-        console.log("created album: "+JSON.stringify(album))
+        console.log("created album: ",JSON.stringify(album))
         // Creation of the imgur images directly inside the previously created album
         this.photoService.photos.forEach(async photo => {
           // Firtly, convert the blob image to a base64 (jpeg) file
           let image = await this.photoService.readAsBase64(photo)
           image = image.split(",").pop()
           // Then, add it to the album
+          console.log("addPictureToAlbum()")
           this.imgurService.addPictureToAlbum(image, album.data.deletehash).subscribe(pic => {
             // If everything went well, return the album {id, deletehash}
             resolve(album.data)
