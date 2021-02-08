@@ -11,6 +11,8 @@ import { latLng, MapOptions, tileLayer, marker, Marker, Polyline, polyline } fro
 
 import { defaultIcon } from './default-marker';
 
+import { ImgurService } from '../../services/imgur.service';
+
 
 @Component({
   selector: 'app-places-map',
@@ -31,8 +33,9 @@ export class PlacesMapPage implements OnInit, OnDestroy {
     private plcMapService: PlaceMapService,
     private route: ActivatedRoute,
     public http: HttpClient,
+    public imgurService: ImgurService
     ) {
-      this.markerId = this.route.snapshot.paramMap.get('id'); 
+    this.markerId = this.route.snapshot.paramMap.get('id'); 
     this.mapOptions = {
       layers: [
         tileLayer(
@@ -115,15 +118,31 @@ export class PlacesMapPage implements OnInit, OnDestroy {
 
       markerTest.bindPopup(popup);
 
-      this.plcMapService.getTripByTripHref(place.tripHref).subscribe(result => {
+      this.plcMapService.getTripByTripHref(place.tripHref).subscribe( async result => {
         let date = new Date(result.createdAt);
         let newDate = this.convertDate(date);
-        let content = `<div class="_wrapper"><div class="_content-top"><div class="_top-left"><div class="_img"><img src="${place.pictureUrl}" ></div><div class="_titre"><h4>${place.description}</h4>
+        let picture
+        let beforePicture
+        let afterPicture
+        await this.imgurService.getFirstPicture(place.pictureUrl).then(thepicture => {
+          picture = thepicture
+        })
+        if (before) {
+          await this.imgurService.getFirstPicture(before.pictureUrl).then(thepicture => {
+            beforePicture = thepicture
+          })
+        }
+        if (after) {
+          await this.imgurService.getFirstPicture(after.pictureUrl).then(thepicture => {
+            afterPicture = thepicture
+          })
+        }
+        let content = `<div class="_wrapper"><div class="_content-top"><div class="_top-left"><div class="_img"><img src="${picture}" ></div><div class="_titre"><h4>${place.description}</h4>
         <p>${result.title}</p><p>${newDate}</p></div></div><div class="top-right"><p class="_voir">voir</p></div></div><div class="_content-bottom">`;
 
 
-        (before) ? content += `<div class="before_wrapper"><p>étape précédente</p><div class="before"><img src="${before.pictureUrl}" ><p>${before.name}</p></div></div>` : content += `<div class="before_wrapper"><p>étape précédente</p><div><p></p></div></div>`;
-        (after) ? content += `<div class="after_wrapper"><p>étape suivante</p><div class="after"><img src="${after.pictureUrl}" ><p>${after.name}</p></div></div>` : content += `<div class="after_wrapper"><p>étape suivante</p><div><p></p></div></div>`;
+        (before) ? content += `<div class="before_wrapper"><p>étape précédente</p><div class="before"><img src="${beforePicture}" ><p>${before.name}</p></div></div>` : content += `<div class="before_wrapper"><p>étape précédente</p><div><p></p></div></div>`;
+        (after) ? content += `<div class="after_wrapper"><p>étape suivante</p><div class="after"><img src="${afterPicture}" ><p>${after.name}</p></div></div>` : content += `<div class="after_wrapper"><p>étape suivante</p><div><p></p></div></div>`;
 
         content += `</div>`;
 
