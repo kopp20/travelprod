@@ -79,6 +79,7 @@ export class TripListPage implements ViewDidEnter {
   }
 
   goPageViewTrip(tripId){
+    
     this.router.navigateByUrl(`/places-map/${tripId}`);
     /*this.router.navigate([`trip-view/${tripId}`])*/
   }

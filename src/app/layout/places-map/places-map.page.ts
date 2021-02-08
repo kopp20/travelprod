@@ -64,13 +64,16 @@ export class PlacesMapPage implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    console.log(this.markerId);
     this.plcMapService.getPlacesbyTripId(this.markerId).subscribe(result => {
       this.leafletMarkers(result);
       this.myPlaces = result
     })
 
     this.plcMapService.getMarkersbyTripId(this.markerId).subscribe(result => {
+      
       this.leafletLines(result);
+      console.log(result)
       this.map.flyTo(result[0], 18)
     })
   }
