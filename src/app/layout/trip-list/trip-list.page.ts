@@ -65,8 +65,12 @@ export class TripListPage implements ViewDidEnter {
 
   searchTrip(){
     this.searchTitle
-    this.triplistservice.getsearchTrip(this.searchTitle).subscribe(trip=>{
-      this.tripData = trip;
+    this.tripData=[];
+    this.triplistservice.getsearchTrip(this.searchTitle).subscribe(async trip=>{
+      trip.forEach(async trip => {
+        trip['image'] = await this.tripService.getFirstImage(trip.id)
+        this.tripData.push(trip)
+      });
     })
   }
 

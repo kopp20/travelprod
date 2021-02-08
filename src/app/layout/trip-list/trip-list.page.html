@@ -19,9 +19,13 @@
       <ion-icon name="search-sharp"></ion-icon>
     </ion-button>
   </ion-item>
+
+
+
     <ion-list class="flex" >
-     <ion-item *ngFor="let tripData of tripData">
-       <div class="flex">
+      <ion-slides>
+        <ion-slide *ngFor="let tripData of tripData; index as position">
+        <div class="flex">
         <ion-card >
           <ion-img (click)="goPageViewTrip(tripData.id)" [src]="tripData.image"></ion-img>
           <ion-card-header>
@@ -29,42 +33,29 @@
             <ion-card-subtitle class="Trip-Date">{{ tripData.createdAt }}</ion-card-subtitle>
           </ion-card-header>
         <ion-card-content>
-          <ion-button  id="item-submit" ion-item (click)="showPlaces(tripData.id)" >{{ tripData.placesCount }} étapes</ion-button>
-          </ion-card-content>
-        </ion-card>
-      </ion-slide>
-      </ion-item>
-    </ion-slides>
+       
+          <ion-button  color="tertiary" id="item-submit" ion-item (click)="showPlaces(tripData.id)" >{{ tripData.placesCount }} étapes</ion-button>
+        </ion-card-content>
+       </ion-card>
+       </div>
+       </ion-slide>
+      </ion-slides>
   </ion-list>
 
     <h1>étapes</h1>
 
     <ion-list>
       <ion-item *ngFor="let placeData of placeData">
-        <ion-slide>
-        <ion-card>
+        <ion-card (click)="goPageView(placeData.id)" >
+          <ion-img class="image" [src]="placeData.pictureUrl"></ion-img>
           <ion-card-header>
             <ion-card-title class="Trip-Title">{{ placeData.name }}</ion-card-title>
             <ion-card-subtitle class="Trip-Date">{{ placeData.createdAt }}</ion-card-subtitle>
           </ion-card-header>
         <ion-card-content>
-        <ion-slide >
-         <ion-thumbnail>
-           <ion-button color="none" class="add-pic-btn" (click)="goPageView(placeData.id)">
-              <ion-img class="image" [src]="placeData.pictureUrl"></ion-img>
-           </ion-button>
-          </ion-thumbnail>
-         </ion-slide>
+        
         </ion-card-content>
        </ion-card>
-     <!-- <ul>
-         <li>Nom : {{ placeData.name}}</li>
-         <li>Trip : {{ tripName.title}}</li>
-         <li>Date : {{ placeData.createdAt}}</li>  
-         <li><button ion-item (click)="goPageView(placeData.id)">Voir </button></li>
-     </ul>
-    -->
-      </ion-slide>
       </ion-item>
      </ion-list>
 </ion-content>
