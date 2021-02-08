@@ -1,8 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{ placeData.name}}</ion-title>
-     <!-- Logout button -->
-     <ion-buttons slot="end">
+    <!--back button-->
+        <ion-buttons slot="start">
+          <ion-back-button defaultHref="trip-list"></ion-back-button>
+        </ion-buttons>
+    <!-- Logout button -->
+    <ion-buttons slot="end">
       <ion-button (click)="logOut()">
         <ion-icon name="log-out"></ion-icon>
       </ion-button>
@@ -11,12 +14,15 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item >
-    <ul>
-       <li>description : {{ placeData.description}}</li> 
-       <li>Date : {{ placeData.createdAt}}</li> 
-   </ul>
-    </ion-item>
-   </ion-list>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{placeData.name}}</ion-card-title>
+      <ion-card-subtitle class="Date">{{placeData.createdAt}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-img [src]="placeData.pictureUrl"></ion-img>
+    <ion-label class="Descr">Description</ion-label>
+    <ion-card-content>
+      {{ placeData.description}}
+    </ion-card-content>
+  </ion-card>
 </ion-content>
