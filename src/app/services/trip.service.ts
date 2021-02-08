@@ -6,13 +6,15 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TripResponse } from '../models/trip-response';
 import { Trip } from '../models/trip';
+import { ImgurService } from './imgur.service';
+import { PlaceResponse } from '../models/place-response';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TripService {
 
-  constructor(private http: HttpClient, private authService: AuthService ) { }
+  constructor(private http: HttpClient, private authService: AuthService, public imgurService: ImgurService ) { }
 
   getCurrentUserTrips(): Observable<TripResponse[]> {
     //Retrieve user id
@@ -39,5 +41,24 @@ export class TripService {
   deleteTrip(trip: TripResponse): Observable<Object> {
     const url = `${environment.apiUrl}/trips/${trip.id}`;
     return this.http.delete(url);
+  }
+
+  async getFirstImage(tripId: string): Promise<any> {
+    const url = `${environment.apiUrl}/places?trip=${tripId}`;
+    let places: any
+    await this.http.get<PlaceResponse[]>(url).toPromise().then(theplaces => {
+      places = theplaces
+    })
+    //console.log( (places[0]) ? this.imgurService.getFirstPicture(places[0].pictureUrl) : "https://i.imgur.com/a7Gzl14.jpg" )
+    if (places[0]) {
+      let picture
+      await this.imgurService.getFirstPicture(places[0].pictureUrl).then(thepicture => {
+        picture = thepicture
+      })
+      return picture
+      return "https://i.imgur.com/a7Gzl14.jpg"
+    } else {
+      return "https://i.imgur.com/a7Gzl14.jpg"
+    } 
   }
 }

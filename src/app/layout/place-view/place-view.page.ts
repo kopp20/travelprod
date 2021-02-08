@@ -41,4 +41,5 @@ export class PlaceViewPage implements ViewDidEnter {
     this.auth.logOut();
     this.router.navigateByUrl("/login");
   }
+
 }

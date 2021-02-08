@@ -16,7 +16,7 @@ export class PlaceService {
 
   }
 
-  createPlace(body: Place): Observable<Place> {
+  createPlace(body: Place): Observable<PlaceResponse> {
     const url = `${environment.apiUrl}/places`;
     return this.http.post<PlaceResponse>(url, body/* , httpOptions */);
   }

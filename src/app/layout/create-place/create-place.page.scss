@@ -1,26 +1,87 @@
+$purple: #d399ff;
+
 select {
     color: black;
 }
 
-ion-slide {
-    max-width: 25vw !important;
-    justify-content: start;
-}
-ion-thumbnail {
-    width: 18vw;
-    height: 18vw;
-}
-ion-slides {
-    margin: 0;
-    width: 100%;
-}
-.add-pic-btn {
-    height: 100%;
-    margin: 0;
-    --padding-start: 2px;
-    --padding-end: 2px;
-}
-.add-pic-btn img {
-    height: 100%;
-    width: 100%;
+
+#create-place-form {
+    ion-item.item-has-focus > ion-label{
+        color: black !important;
+    }
+    ion-label {
+        font-weight: 600;
+        font-size: 1.3rem;
+        margin: 0 0 0.5rem 0;
+    }
+    #item-trip {
+        #select-trip {
+            width: 97%;
+            border-radius: 50px;
+            padding: 0.3rem 1rem;
+            border: none;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            overflow: hidden;
+            margin: 0.5rem auto 0.7rem auto;
+            -moz-appearance:none; /* Firefox */
+            -webkit-appearance:none; /* Safari and Chrome */
+            appearance:none;
+            background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+            background-repeat: no-repeat;
+            background-position-x: 97%;
+            background-position-y: 5px;
+        }
+        ion-input {
+            margin: 0 calc(1.1rem + 1.5%);
+            width: calc(100% - 2rem);
+        }
+    }
+    #item-title {
+        ion-input {
+            font-size: 1.4rem;
+            border-bottom: 1px solid lightgrey;
+            font-weight: 500;
+            height: 1.6em;
+        }
+    }
+    #item-pics {
+        ion-slides {
+            margin: 0.4rem 0 0 0;
+            width: 100%;
+            ion-slide {
+                max-width: 22vw !important;
+                justify-content: start;
+            }
+            ion-thumbnail {
+                --border-radius: 12px;
+                width: 18vw;
+                height: 18vw;
+            }
+            .add-pic-btn {
+                height: 100%;
+                margin: 0;
+                --padding-start: 0px;
+                --padding-end: 0px;
+                img {
+                    height: 100%;
+                    width: 100%;
+                }
+            }
+        }
+    }
+    #item-description {
+        ion-textarea {
+            border: 1px solid lightgrey;
+            padding: 0 0.4rem;
+            border-radius: 18px;
+        }
+    }
+    #item-submit {
+        ion-button {
+            width: 100%;
+            height: 2.4rem;
+            --border-radius: 18px;
+            margin-top: 1rem;
+        }
+    }
 }

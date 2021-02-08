@@ -5,6 +5,8 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { environment } from "src/environments/environment";
 import { Router } from "@angular/router";
 import { TripListService } from './trip-list.service';
+import { ImgurService } from '../../services/imgur.service';
+import { TripService } from '../../services/trip.service';
 import { TripListPageModule } from './trip-list.module';
 import { title } from 'process';
 import { map } from 'rxjs/operators';
@@ -19,7 +21,7 @@ import { viewClassName } from '@angular/compiler';
 })
 export class TripListPage implements ViewDidEnter {
 
-  tripData : Array<any> 
+  tripData : Array<any> = []
   placeData : Array<any>
   tripName : any
   searchTitle : any
@@ -31,10 +33,17 @@ export class TripListPage implements ViewDidEnter {
         // Inject the router
     private router: Router,
     
-    private triplistservice : TripListService 
+    private triplistservice : TripListService ,
+    public imgurService: ImgurService,
+    public tripService: TripService
   ) {
-    triplistservice.getCurrentUserTrips().subscribe(trips =>{
-       this.tripData = trips;
+    triplistservice.getCurrentUserTrips().subscribe(trips => {
+      trips.forEach(async trip => {
+        trip['image'] = await this.tripService.getFirstImage(trip.id)
+        this.tripData.push(trip)
+      });
+      /* this.tripData = trips; */
+      console.log(this.tripData)
     })
     
     
