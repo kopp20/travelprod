@@ -22,7 +22,7 @@ import { viewClassName } from '@angular/compiler';
 export class TripListPage implements ViewDidEnter {
 
   tripData : Array<any> = []
-  placeData : Array<any>
+  placeData : Array<any> = []
   tripName : any
   searchTitle : any
 
@@ -56,10 +56,13 @@ export class TripListPage implements ViewDidEnter {
   
   showPlaces(tripId){
     this.triplistservice.getCurrentTrip(tripId).subscribe(places=>{
-      this.placeData = places;
-    })
-    this.triplistservice.getCurrentTripname(tripId).subscribe(trip=>{
-      this.tripName = trip;
+      this.placeData = []
+      places.forEach(async place => {
+        place['image'] = await this.tripService.getFirstImage(place.id)
+        this.placeData.push(place)
+        console.log(this.placeData)
+      });
+      
     })
   }
 

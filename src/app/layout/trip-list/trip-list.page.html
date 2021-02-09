@@ -46,8 +46,8 @@
 
     <ion-list>
       <ion-item *ngFor="let placeData of placeData">
-        <ion-card (click)="goPageView(placeData.id)" >
-          <ion-img class="image" [src]="placeData.pictureUrl"></ion-img>
+        <ion-card id="places" (click)="goPageView(placeData.id)" >
+          <ion-img class="image" [src]="placeData.image"></ion-img>
           <ion-card-header>
             <ion-card-title class="Trip-Title">{{ placeData.name }}</ion-card-title>
             <ion-card-subtitle class="Trip-Date">{{ placeData.createdAt }}</ion-card-subtitle>

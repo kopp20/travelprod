@@ -19,7 +19,13 @@
       <ion-card-title>{{placeData.name}}</ion-card-title>
       <ion-card-subtitle class="Date">{{placeData.createdAt}}</ion-card-subtitle>
     </ion-card-header>
-    <ion-img [src]="placeData.pictureUrl"></ion-img>
+    <ion-slides>
+      <ion-slide *ngFor="let place of placeData.images; index as position">
+      <div class="flex">
+        <ion-img [src]="place.link"></ion-img>
+     </div>
+     </ion-slide>
+    </ion-slides>
     <ion-label class="Descr">Description</ion-label>
     <ion-card-content>
       {{ placeData.description}}
