@@ -28,6 +28,7 @@ export class PlaceViewPage implements ViewDidEnter {
     this.id = this.route.snapshot.paramMap.get('id'); 
     this.triplistservice.getPlaceView(this.id).subscribe(place=>{
     this.placeData = place;
+    this.placeData.date = this.convertDate(place.createdAt)
     imgurService.getAllPictures(this.placeData.pictureUrl).subscribe(pics => {
       if(pics) {
         this.placeData['images'] = pics
@@ -56,4 +57,9 @@ export class PlaceViewPage implements ViewDidEnter {
     this.router.navigateByUrl("/login");
   }
 
+  convertDate(inputFormat) {
+    function pad(s) { return (s < 10) ? '0' + s : s; }
+    var d = new Date(inputFormat)
+    return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('.')
+  }
 }

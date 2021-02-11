@@ -40,6 +40,7 @@ export class TripListPage implements ViewDidEnter {
     triplistservice.getCurrentUserTrips().subscribe(trips => {
       trips.forEach(async trip => {
         trip['image'] = await this.tripService.getFirstImage(trip.id)
+        trip['date'] = this.convertDate(trip.createdAt);
         this.tripData.push(trip)
       });
       /* this.tripData = trips; */
@@ -59,6 +60,7 @@ export class TripListPage implements ViewDidEnter {
       this.placeData = []
       places.forEach(async place => {
         place['image'] = await this.tripService.getFirstImage(place.id)
+        place['date'] = this.convertDate(place.createdAt)
         this.placeData.push(place)
         console.log(this.placeData)
       });
@@ -98,5 +100,11 @@ export class TripListPage implements ViewDidEnter {
     console.log("logging out...");
     this.auth.logOut();
     this.router.navigateByUrl("/login");
+  }
+  
+  convertDate(inputFormat) {
+    function pad(s) { return (s < 10) ? '0' + s : s; }
+    var d = new Date(inputFormat)
+    return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('.')
   }
 }
