@@ -15,7 +15,7 @@ import { PlaceResponse } from '../../models/place-response';
 })
 export class PlaceViewPage implements ViewDidEnter {
   id: any;
-  placeData : PlaceResponse;
+  placeData : any;
   constructor(
     private route: ActivatedRoute,
     private router : Router,
@@ -36,8 +36,8 @@ export class PlaceViewPage implements ViewDidEnter {
         this.placeData['images'] = [{link: "https://i.imgur.com/ixhTOo3.png"},{link: "https://i.imgur.com/IRXvGl5.jpg"}]
       }
     }, err => {
-      console.log("error")
       this.placeData['images'] = [{link: "https://i.imgur.com/ixhTOo3.png"},{link: "https://i.imgur.com/IRXvGl5.jpg"}]
+      console.log("image ",this.placeData.images)
     })
   })
 }
