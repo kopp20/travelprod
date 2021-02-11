@@ -6,7 +6,8 @@ import { TripListService } from '../trip-list/trip-list.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ImgurService } from '../../services/imgur.service';
 import { PlaceResponse } from '../../models/place-response';
-
+import * as L from 'leaflet';
+import { defaultIcon } from '../places-map/default-marker';
 
 @Component({
   selector: 'app-place-view',
@@ -40,15 +41,28 @@ export class PlaceViewPage implements ViewDidEnter {
       this.placeData['images'] = [{link: "https://i.imgur.com/ixhTOo3.png"},{link: "https://i.imgur.com/IRXvGl5.jpg"}]
       console.log("image ",this.placeData.images)
     })
+
+    let map = L.map('_mapId');
+      map.setView(this.placeData.location.coordinates, 16);
+      L.tileLayer(
+        'https://{s}.tile.jawg.io/jawg-dark/{z}/{x}/{y}{r}.png?access-token=CLh9srebP4AGiZBhlqC1Ru2R0EuX5ywlP45a9Pm01VP3mdImGZz2rqdP2deHhGaq',
+        {
+          accessToken: 'CLh9srebP4AGiZBhlqC1Ru2R0EuX5ywlP45a9Pm01VP3mdImGZz2rqdP2deHhGaq'
+          , maxZoom: 19
+        }
+      ).addTo(map);
+      L.marker(this.placeData.location.coordinates, {icon : defaultIcon}).addTo(map);
+    
   })
 }
 
   ionViewDidEnter(): void {
-
+  
   }
 
 
   ngOnInit() {
+    
 
   }
   logOut() {

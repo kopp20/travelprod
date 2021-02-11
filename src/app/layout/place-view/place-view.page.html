@@ -31,4 +31,7 @@
       {{ placeData.description}}
     </ion-card-content>
   </ion-card>
+  <div class="_wrapper-leaf">
+    <div class="leaflet-map" id="_mapId"  (leafletMapReady)="onMapReady($event)"></div>
+  </div>
 </ion-content>
