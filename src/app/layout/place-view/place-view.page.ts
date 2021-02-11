@@ -35,10 +35,10 @@ export class PlaceViewPage implements ViewDidEnter {
         this.placeData['images'] = pics
       }
       else {
-        this.placeData['images'] = [{link: "https://i.imgur.com/ixhTOo3.png"},{link: "https://i.imgur.com/IRXvGl5.jpg"}]
+        this.placeData['images'] = [{link: "https://i.imgur.com/ChL3siv.png"},{link: "https://i.imgur.com/EFDEpS6.jpg"}]
       }
     }, err => {
-      this.placeData['images'] = [{link: "https://i.imgur.com/ixhTOo3.png"},{link: "https://i.imgur.com/IRXvGl5.jpg"}]
+      this.placeData['images'] = [{link: "https://i.imgur.com/ChL3siv.png"},{link: "https://i.imgur.com/EFDEpS6.jpg"}]
       console.log("image ",this.placeData.images)
     })
 

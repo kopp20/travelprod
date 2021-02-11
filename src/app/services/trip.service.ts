@@ -56,9 +56,8 @@ export class TripService {
         picture = thepicture
       })
       return picture
-      return "https://i.imgur.com/a7Gzl14.jpg"
     } else {
-      return "https://i.imgur.com/a7Gzl14.jpg"
+      return "https://i.imgur.com/XUqzkuZ.jpg"
     } 
   }
 }

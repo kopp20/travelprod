@@ -60,7 +60,7 @@ export class ImgurService {
     await this.getAllPictures(album).toPromise().then(pictures => {
       picture = pictures[0]
     }).catch(() => {
-      picture = "https://i.imgur.com/ixhTOo3.png"
+      picture = "https://i.imgur.com/ChL3siv.png"
     })
     return picture
   }
