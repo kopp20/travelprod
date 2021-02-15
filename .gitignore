@@ -32,7 +32,3 @@ npm-debug.log*
 /android
 /ios
 
-# Environment files
-src/environments/*
-src/environments/environment.ts
-
